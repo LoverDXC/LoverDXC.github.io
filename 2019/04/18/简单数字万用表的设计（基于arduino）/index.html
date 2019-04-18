@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>&#39;简单数字万用表的设计（基于arduino）&#39; | 董星辰的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="MinHow,MinHow's Blog">
+  
+  <meta name="description" content="简单数字万用表的设计（基于arduino）哈哈哈哈，真开心 一.基本要求 电压测量范围0~2v,测量误差&amp;lt;2.5%; 电阻测量范围0~2k,测量误差&amp;lt;2.5%; 采用lcd1602显示； 设计两个按键来选择测量范围； 具有测量完成声音提示功能； 二.设计思路利用arduino的模拟口能读取电压的思路，来读取相应的模拟量，因为其反馈回的是1024份，所以要相应的除以1024； 1.选择按">
+<meta property="og:type" content="article">
+<meta property="og:title" content="&#39;简单数字万用表的设计（基于arduino）&#39;">
+<meta property="og:url" content="http://yoursite.com/2019/04/18/简单数字万用表的设计（基于arduino）/index.html">
+<meta property="og:site_name" content="董星辰的博客">
+<meta property="og:description" content="简单数字万用表的设计（基于arduino）哈哈哈哈，真开心 一.基本要求 电压测量范围0~2v,测量误差&amp;lt;2.5%; 电阻测量范围0~2k,测量误差&amp;lt;2.5%; 采用lcd1602显示； 设计两个按键来选择测量范围； 具有测量完成声音提示功能； 二.设计思路利用arduino的模拟口能读取电压的思路，来读取相应的模拟量，因为其反馈回的是1024份，所以要相应的除以1024； 1.选择按">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-18T03:34:51.216Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="&#39;简单数字万用表的设计（基于arduino）&#39;">
+<meta name="twitter:description" content="简单数字万用表的设计（基于arduino）哈哈哈哈，真开心 一.基本要求 电压测量范围0~2v,测量误差&amp;lt;2.5%; 电阻测量范围0~2k,测量误差&amp;lt;2.5%; 采用lcd1602显示； 设计两个按键来选择测量范围； 具有测量完成声音提示功能； 二.设计思路利用arduino的模拟口能读取电压的思路，来读取相应的模拟量，因为其反馈回的是1024份，所以要相应的除以1024； 1.选择按">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/pace.min.js"></script>
+  
+
+  
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+      <header id="header">
+    <div id="banner"></div>
+    <div id="header-outer">
+        <div id="header-menu" class="header-menu-pos animated">
+            <div class="header-menu-container">
+                <a href="/" class="left">
+                    <span class="site-title">DXC’blog</span>
+                </a>
+                <nav id="header-menu-nav" class="right">
+                    
+                    <a href="//www,chenwangheart.top">
+                        <i class="fa fa-home"></i>
+                        <span>主页</span>
+                    </a>
+                    
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>
+                        <span>日记</span>
+                    </a>
+                    
+                </nav>
+                <a class="mobile-header-menu-button">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        <div id="header-row">
+            <div id="logo">
+                <a href="/">
+                    <img src="/images/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="header-info">
+                <div id="header-title">
+                    
+                    <h2>
+                        DXC’blog
+                    </h2>
+                    
+                </div>
+                <div id="header-description">
+                    
+                    <h3>
+                        专注于嵌入式的博客
+                    </h3>
+                    
+                </div>
+            </div>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a title="Dongxingchen" target="_blank" href="//dongxingchen.com">
+                            <i class="fa fa-home fa-2x"></i></a>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+      <div class="outer">
+        <section id="main" class="body-wrap"><article id="post-简单数字万用表的设计（基于arduino）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="post-title" itemprop="name">
+      &#39;简单数字万用表的设计（基于arduino）&#39;
+    </h1>
+    <div class="post-title-bar">
+      <ul>
+          
+        <li>
+          <i class="fa fa-calendar"></i>  2019-04-18
+        </li>
+        <li>
+          <i class="fa fa-eye"></i>
+          <span id="busuanzi_value_page_pv"></span>
+        </li>
+      </ul>
+    </div>
+  
+
+          
+      </header>
+    
+    <div class="article-entry post-content" itemprop="articleBody">
+      
+            
+            <h3 id="简单数字万用表的设计（基于arduino）"><a href="#简单数字万用表的设计（基于arduino）" class="headerlink" title="简单数字万用表的设计（基于arduino）"></a>简单数字万用表的设计（基于arduino）</h3><p>哈哈哈哈，真开心</p>
+<h4 id="一-基本要求"><a href="#一-基本要求" class="headerlink" title="一.基本要求"></a>一.基本要求</h4><p> 电压测量范围0~2v,测量误差&lt;2.5%;</p>
+<p>电阻测量范围0~2k,测量误差&lt;2.5%;</p>
+<p>采用lcd1602显示；</p>
+<p>设计两个按键来选择测量范围；</p>
+<p>具有测量完成声音提示功能；</p>
+<h4 id="二-设计思路"><a href="#二-设计思路" class="headerlink" title="二.设计思路"></a>二.设计思路</h4><p>利用arduino的模拟口能读取电压的思路，来读取相应的模拟量，因为其反馈回的是1024份，所以要相应的除以1024；</p>
+<h5 id="1-选择按钮的设计思路"><a href="#1-选择按钮的设计思路" class="headerlink" title="1.选择按钮的设计思路"></a>1.选择按钮的设计思路</h5><h6 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h6><p>首先设计两个按钮来进行选择，一个测量电压，一个来测量电阻，所以我们就需要写两份lcd函数，其次是进行的按钮的排序问题，我的思路是设计两个变量，一个分别对应一个if条件语句，示例如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(button1 == <span class="number">1</span>)&#123;</span><br><span class="line">    pass;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(button2 == <span class="number">1</span>)&#123;</span><br><span class="line">    pass;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="改进算法"><a href="#改进算法" class="headerlink" title="改进算法"></a>改进算法</h6><p>由于要求按一下切换模式也就是这种算法是不行的，因此我们需要改进一下算法来实现，我们可以加三个标志位来实现，第一步是总的标志位，就是来判断是否有按键按下，但是由于arduino中已有loop函数所以我们只需要设置两个标志位就可以了，并且是在两个判断语句中；</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(button1 == <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">while</span>(button2!=<span class="number">1</span>)&#123;</span><br><span class="line">        pass;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(button2 == <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="keyword">while</span>(button1 != <span class="number">1</span>)&#123;</span><br><span class="line">        pass;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个思路是如果button1已经按下也就是说，他会进入第一个if条件句，并且在第button2没有按下之前他会一直在第一个判断句中不会跳出来。</p>
+<h5 id="2-lcd1602的相关函数"><a href="#2-lcd1602的相关函数" class="headerlink" title="2.lcd1602的相关函数"></a>2.lcd1602的相关函数</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;LiquidCrystal.h&gt;//导入lcd1602函数库</span></span></span><br><span class="line"><span class="function">LiquidCrystal <span class="title">lcd</span><span class="params">(rs,rw,en,d4,d5,d6,d7)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span>&#123;</span><br><span class="line">    lcd.begin(<span class="number">16</span>,<span class="number">2</span>);<span class="comment">//设置lcd的显示数目。16x2；16格两行；</span></span><br><span class="line">    lcd.print('hello world！');//将print中的内容打印到显示屏上</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    lcd.setCursor(<span class="number">0</span>,<span class="number">1</span>);<span class="comment">//设置光标位置，第0行，第1列，这个地方的位置与数组相似</span></span><br><span class="line">    lcd.print(millis()/<span class="number">1000</span>);<span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="（1）初始化函数"><a href="#（1）初始化函数" class="headerlink" title="（1）初始化函数"></a>（1）初始化函数</h6><p>lcd.begin(16,2);//设置lcd的显示数目。16x2；16格两行；</p>
+<h6 id="（2）清屏函数"><a href="#（2）清屏函数" class="headerlink" title="（2）清屏函数"></a>（2）清屏函数</h6><p>lcd.clear();</p>
+<h6 id="（3）打印函数"><a href="#（3）打印函数" class="headerlink" title="（3）打印函数"></a>（3）打印函数</h6><p>lcd.print();//与常见的相似，若为字符串的需要加  ‘ ‘;</p>
+<h6 id="（4）光标设置函数"><a href="#（4）光标设置函数" class="headerlink" title="（4）光标设置函数"></a>（4）光标设置函数</h6><p>lcd.setCursor(r,l);//r为行数，l为列数；</p>
+<p>lcd.noCursor();不显示光标函数；</p>
+<p>lcd.cursor();显示光标；</p>
+<p>lcd.noBlink();不闪动光标；</p>
+<p>lcd.blink();闪动光标；</p>
+<h6 id="（5）回家函数"><a href="#（5）回家函数" class="headerlink" title="（5）回家函数"></a>（5）回家函数</h6><p>lcd.home();就是回到0，0位置；</p>
+<h6 id="（6）从右向左显示函数"><a href="#（6）从右向左显示函数" class="headerlink" title="（6）从右向左显示函数"></a>（6）从右向左显示函数</h6><p>lcd.rightToLeft();</p>
+<h6 id="（7）自动滚屏函数"><a href="#（7）自动滚屏函数" class="headerlink" title="（7）自动滚屏函数"></a>（7）自动滚屏函数</h6><p>lcd.autoscroll();就是将你显示的东西自动滚出去</p>
+<h5 id="3-测量电阻的电位计"><a href="#3-测量电阻的电位计" class="headerlink" title="3.测量电阻的电位计"></a>3.测量电阻的电位计</h5><p>首先利用A0口的能读取模拟电压的特性以及串联分压的特性，首先从5v口引出一个5v电压串联一个电阻，然后根据欧姆定律，并联分压来测得相应的电压；</p>
+<p>函数设计：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> Vin = <span class="number">5</span>;<span class="comment">//电源端电压</span></span><br><span class="line"><span class="keyword">float</span> Vout = <span class="number">0</span>;<span class="comment">//测量时的电压</span></span><br><span class="line"><span class="keyword">float</span> r = <span class="number">2000</span>;<span class="comment">//标准电阻</span></span><br><span class="line"><span class="keyword">float</span> r2 = <span class="number">0</span>;<span class="comment">//测量的电阻</span></span><br><span class="line"><span class="keyword">int</span>  dataA0 = <span class="number">0</span>;<span class="comment">//A0口的输出的数值</span></span><br><span class="line"><span class="keyword">float</span> buffer = <span class="number">0</span>;<span class="comment">//真正的分压</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    dateA0 = analogRead(A0);</span><br><span class="line">    <span class="keyword">if</span>(dateA0)&#123;</span><br><span class="line">        buffer = dateA0*Vin;</span><br><span class="line">        Vout = (buffer)/<span class="number">1024</span>;</span><br><span class="line">        buffer = Vout/(Vin - Vout);</span><br><span class="line">        r2 = r*buffer;<span class="comment">//r2就是我们要求的电阻值</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="4-测量电压的电位计"><a href="#4-测量电压的电位计" class="headerlink" title="4.测量电压的电位计"></a>4.测量电压的电位计</h5><p>与测量电压相似，这个也是利用A0口与A1口的电位差来测量的</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> Va0;</span><br><span class="line"><span class="keyword">int</span> Va1;</span><br><span class="line"><span class="keyword">float</span> re_va0;</span><br><span class="line"><span class="keyword">float</span> re_va1;</span><br><span class="line"><span class="keyword">float</span> re_dec;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Va0 = analoRead(A0);</span><br><span class="line">    re_va0 = (Va0*<span class="number">5.0</span>)/<span class="number">1024</span>;</span><br><span class="line">    Va1 = analoRead(A1);</span><br><span class="line">    re_va1 = (Va1*<span class="number">5.0</span>)/<span class="number">1024</span>;</span><br><span class="line">    re_dec = re_va1 - re_va0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="三-总程序"><a href="#三-总程序" class="headerlink" title="三.总程序"></a>三.总程序</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;LiquidCrystal.h&gt;</span></span></span><br><span class="line"><span class="function">LiquidCrystal <span class="title">lcd</span><span class="params">(<span class="number">12</span>,<span class="number">11</span>,<span class="number">10</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">6</span>)</span></span>;</span><br><span class="line"><span class="keyword">int</span> Vin = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">float</span> Vout = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">float</span> r = <span class="number">2000</span>;</span><br><span class="line"><span class="keyword">float</span> r1 = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> vA0;</span><br><span class="line"><span class="keyword">int</span> vA1;</span><br><span class="line"><span class="keyword">int</span> vA2;</span><br><span class="line"><span class="keyword">float</span> re_va0;</span><br><span class="line"><span class="keyword">float</span> re_va1;</span><br><span class="line"><span class="keyword">float</span> re_va2;</span><br><span class="line"><span class="keyword">float</span> display;</span><br><span class="line"><span class="keyword">int</span> button1 = <span class="number">13</span>;</span><br><span class="line"><span class="keyword">int</span> button2 = <span class="number">14</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span>&#123;</span><br><span class="line">    lcd.begin(<span class="number">16</span>,<span class="number">2</span>);</span><br><span class="line">    pinMode(button1,INPUT);</span><br><span class="line">    pinMode(button2,INPUT);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(button1==<span class="number">1</span>)&#123;</span><br><span class="line">        lcd.clear();</span><br><span class="line">        <span class="keyword">while</span>(button2 != <span class="number">1</span>)&#123;</span><br><span class="line">        	vA0 = analogRead(A0);</span><br><span class="line">            <span class="keyword">if</span>(dateA0)&#123;</span><br><span class="line">                re_va0 = vA0*Vin;</span><br><span class="line">                Vout = (re_va1)/<span class="number">1024</span>;</span><br><span class="line">                re_val = Vout/(Vin - Vout);</span><br><span class="line">                r2 = r*re_val;<span class="comment">//r2就是我们要求的电阻值</span></span><br><span class="line">                lcd.setCursor(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">                lcd.print(<span class="string">'R'</span>);</span><br><span class="line">                lcd.setCursor(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">                lcd.print(re_val);</span><br><span class="line">                lcd.setCursor(<span class="number">0</span>,<span class="number">14</span>);</span><br><span class="line">                lcd.print(<span class="string">'R'</span>);</span><br><span class="line">        	&#125;</span><br><span class="line">   	    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(button2 ==<span class="number">1</span>)&#123;</span><br><span class="line">        lcd.clear();</span><br><span class="line">        <span class="keyword">while</span>(button1 != <span class="number">1</span>)&#123;</span><br><span class="line">            vA1 = analogRead(A1);</span><br><span class="line">            vA2 = analogRead(A2);</span><br><span class="line">            re_va1 = (vA1*<span class="number">5</span>)/<span class="number">1024</span>;</span><br><span class="line">            re_va2 = (vA2*)/<span class="number">1024</span>;</span><br><span class="line">            <span class="keyword">if</span>(re_va1&gt;re_va2)dis = re_val-re_va2;</span><br><span class="line">            <span class="keyword">if</span>(re_va2&gt;re_va1)dis = re_va2 -re_va1;</span><br><span class="line">            <span class="keyword">if</span>(re_va2 == re_va1)dis  = <span class="number">0</span>;</span><br><span class="line">            lcd.setCursor(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">            lcd.print('vvvvvvvvvvvvv');</span><br><span class="line">            lcd.setCursor(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">            lcd.print(dis);</span><br><span class="line">            lcd.setCursor(<span class="number">1</span>,<span class="number">14</span>);</span><br><span class="line">            lcd.print(<span class="string">'R'</span>); </span><br><span class="line">          &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="四-电路图"><a href="#四-电路图" class="headerlink" title="四.电路图"></a>四.电路图</h4><p>啊，这个以后看看吧，frizing还不会使；</p>
+
+            <div class="post-copyright">
+    <div class="content">
+        <p>最后更新： 2019年04月18日 11:34</p>
+        <p>原始链接： <a class="post-url" href="/2019/04/18/简单数字万用表的设计（基于arduino）/" title="&#39;简单数字万用表的设计（基于arduino）&#39;">http://yoursite.com/2019/04/18/简单数字万用表的设计（基于arduino）/</a></p>
+        <footer>
+            <a href="http://yoursite.com">
+                <img src="/images/logo.png" alt="董星辰">
+                董星辰
+            </a>
+        </footer>
+    </div>
+</div>
+
+      
+        
+            
+
+        
+    </div>
+    <footer class="article-footer">
+        
+        
+<div class="post-share">
+    <a href="javascript:;" id="share-sub" class="post-share-fab">
+        <i class="fa fa-share-alt"></i>
+    </a>
+    <div class="post-share-list" id="share-list">
+        <ul class="share-icons">
+          <li>
+            <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/04/18/简单数字万用表的设计（基于arduino）/&title=《'简单数字万用表的设计（基于arduino）'》 — 董星辰的博客&pic=http://yoursite.comimages/logo.png" data-title="微博">
+              <i class="fa fa-weibo"></i>
+            </a>
+          </li>
+          <li>
+            <a class="weixin share-sns" id="wxFab" href="javascript:;" data-title="微信">
+              <i class="fa fa-weixin"></i>
+            </a>
+          </li>
+          <li>
+            <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/04/18/简单数字万用表的设计（基于arduino）/&title=《'简单数字万用表的设计（基于arduino）'》 — 董星辰的博客&source=" data-title="QQ">
+              <i class="fa fa-qq"></i>
+            </a>
+          </li>
+          <li>
+            <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/04/18/简单数字万用表的设计（基于arduino）/" data-title="Facebook">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《'简单数字万用表的设计（基于arduino）'》 — 董星辰的博客&url=http://yoursite.com/2019/04/18/简单数字万用表的设计（基于arduino）/&via=http://yoursite.com" data-title="Twitter">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/04/18/简单数字万用表的设计（基于arduino）/" data-title="Google+">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        </ul>
+     </div>
+</div>
+<div class="post-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;" id="wxShare-close">×</a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://yoursite.com/2019/04/18/简单数字万用表的设计（基于arduino）/" alt="微信分享二维码">
+</div>
+
+<div class="mask"></div>
+
+        
+        <ul class="article-footer-menu">
+            
+            
+        </ul>
+        
+    </footer>
+  </div>
+</article>
+
+
+    <aside class="post-toc-pos post-toc-top" id="post-toc">
+        <nav class="post-toc-wrap">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单数字万用表的设计（基于arduino）"><span class="post-toc-text">简单数字万用表的设计（基于arduino）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一-基本要求"><span class="post-toc-text">一.基本要求</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#二-设计思路"><span class="post-toc-text">二.设计思路</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-选择按钮的设计思路"><span class="post-toc-text">1.选择按钮的设计思路</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#基本思路"><span class="post-toc-text">基本思路</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#改进算法"><span class="post-toc-text">改进算法</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-lcd1602的相关函数"><span class="post-toc-text">2.lcd1602的相关函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#（1）初始化函数"><span class="post-toc-text">（1）初始化函数</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#（2）清屏函数"><span class="post-toc-text">（2）清屏函数</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#（3）打印函数"><span class="post-toc-text">（3）打印函数</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#（4）光标设置函数"><span class="post-toc-text">（4）光标设置函数</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#（5）回家函数"><span class="post-toc-text">（5）回家函数</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#（6）从右向左显示函数"><span class="post-toc-text">（6）从右向左显示函数</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#（7）自动滚屏函数"><span class="post-toc-text">（7）自动滚屏函数</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-测量电阻的电位计"><span class="post-toc-text">3.测量电阻的电位计</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-测量电压的电位计"><span class="post-toc-text">4.测量电压的电位计</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#三-总程序"><span class="post-toc-text">三.总程序</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#四-电路图"><span class="post-toc-text">四.电路图</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+
+<nav id="article-nav">
+  
+  
+    <a href="/2019/04/12/基于89c52的简单计算器的实现/" id="article-nav-older" class="article-nav-link-wrap">
+      <span class="article-nav-title">基于89c52的简单计算器的实现</span>
+      <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    </a>
+  
+</nav>
+
+
+
+    
+</section>
+        
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+      <p>
+        Powered by  <a href="http://hexo.io/" target="_blank">Hexo</a>
+        Theme <a href="//github.com/wongminho/hexo-theme-miho" target="_blank">MiHo</a>
+      &copy; 2019 董星辰<br>
+      </p>
+    </div>
+  </div>
+</footer>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  var mihoConfig = {
+      root: "http://yoursite.com",
+      animate: true,
+      isHome: false,
+      share: true,
+      reward: 0
+  }
+</script>
+<div class="sidebar">
+    <div id="sidebar-search" title="Search">
+        <i class="fa fa-search"></i>
+    </div>
+    <div id="sidebar-category" title="Categories">
+        <i class="fa fa-book"></i>
+    </div>
+    <div id="sidebar-tag" title="Tags">
+        <i class="fa fa-tags"></i>
+    </div>
+    <div id="sidebar-top">
+        <span class="sidebar-top-icon"><i class="fa fa-angle-up"></i></span>
+    </div>
+</div>
+<div class="sidebar-menu-box" id="sidebar-menu-box">
+    <div class="sidebar-menu-box-container">
+        <div id="sidebar-menu-box-categories">
+            
+        </div>
+        <div id="sidebar-menu-box-tags">
+            
+        </div>
+    </div>
+    <a href="javascript:;" class="sidebar-menu-box-close">&times;</a>
+</div>
+<div class="mobile-header-menu-nav" id="mobile-header-menu-nav">
+    <div class="mobile-header-menu-container">
+        <span class="title">Menus</span>
+        <ul class="mobile-header-menu-navbar">
+            
+            <li>
+                <a href="//www,chenwangheart.top">
+                    <i class="fa fa-home"></i><span>主页</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/archives">
+                    <i class="fa fa-archive"></i><span>日记</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div class="mobile-header-tag-container">
+        <span class="title">Tags</span>
+        <div id="mobile-header-container-tags">
+            
+        </div>
+    </div>
+</div>
+<div class="search-wrap">
+    <span class="search-close">&times;</span>
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+            <i class="icon icon-lg icon-chevron-left"></i>
+        </a>
+        <input class="search-field" placeholder="Search..." id="keywords">
+        <a id="search-submit" href="javascript:;">
+            <i class="fa fa-search"></i>
+        </a>
+    <div class="search-container" id="search-container">
+        <ul class="search-result" id="search-result">
+        </ul>
+    </div>
+</div>
+
+<div id="search-tpl">
+    <li class="search-result-item">
+        <a href="{url}" class="search-item-li">
+            <span class="search-item-li-title" title="{title}">{title}</span>
+        </a>
+    </li>
+</div>
+<script src="/js/search.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="//cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+  <div id="particles"></div>
+  <script src="/js/particles.js"></script>
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.0.5/scrollreveal.js"></script>
+  <script src="/js/animate.js"></script>
+
+
+  <script src="/js/pop-img.js"></script>
+  <script>
+     $(".article-entry p img").popImg();
+  </script>
+
+  </div>
+</body>
+</html>
